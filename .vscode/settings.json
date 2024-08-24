@@ -1,0 +1,63 @@
+{
+    "cmsis-csolution.actions": [
+        {
+            "path": "study-stm32.csolution.yml",
+            "target": "STM32F103C8",
+            "config": {
+                "run": "Flash Device",
+                "debug": "Arm Debugger"
+            },
+            "projects": [
+                {
+                    "path": "001-LED/001-LED.cproject.yml",
+                    "config": {
+                        "run": "Flash Device",
+                        "debug": "Arm Debugger"
+                    }
+                },
+                {
+                    "path": "002-BTN/002-BTN.cproject.yml",
+                    "config": {
+                        "run": "Flash Device",
+                        "debug": "Arm Debugger"
+                    }
+                },
+                {
+                    "path": "003-Timer/003-Timer.cproject.yml",
+                    "config": {
+                        "run": "Flash Device",
+                        "debug": "Arm Debugger"
+                    }
+                },
+                {
+                    "path": "010-ExtInt/010-ExtInt.cproject.yml",
+                    "config": {
+                        "run": "Flash Device",
+                        "debug": "Arm Debugger"
+                    }
+                },
+                {
+                    "path": "020-BreathLED/020-BreathLED.cproject.yml",
+                    "config": {
+                        "run": "Flash Device",
+                        "debug": "Arm Debugger"
+                    }
+                },
+                {
+                    "path": "030-InputCompare/030-InputCompare.cproject.yml",
+                    "config": {
+                        "run": "Flash Device",
+                        "debug": "Arm Debugger"
+                    }
+                },
+                {
+                    "path": "040-Servo/040-Servo.cproject.yml",
+                    "config": {
+                        "run": "Flash Device",
+                        "debug": "Arm Debugger"
+                    }
+                }
+            ]
+        }
+    ],
+}

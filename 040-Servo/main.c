@@ -1,6 +1,5 @@
-#include "RTE_Components.h"
+#include "stm32f10x_conf.h"
 #include "sys.h"
-#include CMSIS_device_header
 #include "breath.h"
 #include "btn.h"
 #include "delay.h"

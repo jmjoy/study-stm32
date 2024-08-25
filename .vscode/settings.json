@@ -56,6 +56,13 @@
                         "run": "Flash Device",
                         "debug": "Arm Debugger"
                     }
+                },
+                {
+                    "path": "004-74HC595/004-74HC595.cproject.yml",
+                    "config": {
+                        "run": "Flash Device",
+                        "debug": "Arm Debugger"
+                    }
                 }
             ]
         }

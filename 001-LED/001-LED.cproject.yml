@@ -28,7 +28,6 @@ project:
     - component: Keil::Device:StdPeriph Drivers:GPIO
     - component: Keil::Device:StdPeriph Drivers:Framework@3.6.0
     - component: Keil::Device:StdPeriph Drivers:RCC@3.6.0
-    - component: Keil::Device:Startup
     - component: Keil::Device:StdPeriph Drivers:TIM
     - component: Keil::Device:StdPeriph Drivers:ADC
     - component: Keil::Device:StdPeriph Drivers:EXTI

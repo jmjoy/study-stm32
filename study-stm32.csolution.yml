@@ -30,6 +30,7 @@ solution:
     - project: 002-BTN/002-BTN.cproject.yml
     - project: 003-Timer/003-Timer.cproject.yml
     - project: 004-74HC595/004-74HC595.cproject.yml
+    - project: 005-MatrixLED/005-MatrixLED.cproject.yml
     - project: 010-ExtInt/010-ExtInt.cproject.yml
     - project: 020-BreathLED/020-BreathLED.cproject.yml
     - project: 030-InputCompare/030-InputCompare.cproject.yml

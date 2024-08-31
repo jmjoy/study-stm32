@@ -4,6 +4,7 @@ void Breathing_Init(uint16_t PSC, uint16_t ARR) {
     // 启用TIM2时钟
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 
+    // 查看引脚图，可得TIM2_CH1对应的是PA0
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 	GPIO_InitTypeDef GPIO_InitStructure;
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;

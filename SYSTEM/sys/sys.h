@@ -1,5 +1,6 @@
 #ifndef __SYS_H
 #define __SYS_H	
+#include <stdint.h>
 #include "stm32f10x.h" 
 
 //0,��֧��ucos
@@ -67,6 +68,15 @@ void NVIC_Configuration(void);
   * @retval None
   */
 void GPIO_ToggleBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
+
+/**
+ * @brief 循环左移
+ * 
+ * @param value 
+ * @param n 
+ * @return uint32_t 
+ */
+uint32_t rotate_left(uint32_t value, uint32_t n);
 
 
 #endif

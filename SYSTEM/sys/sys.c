@@ -24,3 +24,12 @@ void GPIO_ToggleBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 
   GPIOx->ODR ^= GPIO_Pin;
 }
+
+uint32_t rotate_left(uint32_t value, uint32_t n) {
+    uint32_t result;
+    __asm__ volatile("ROR %0, %1, %2" // 使用ROR指令，将value循环右移(32-n)位
+                     : "=r"(result) // 输出操作数，存储到result
+                     : "r"(value), "r"(32 - n) // 输入操作数：value和(32-n)
+    );
+    return result;
+}

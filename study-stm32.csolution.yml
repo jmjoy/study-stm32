@@ -35,3 +35,4 @@ solution:
     - project: 020-BreathLED/020-BreathLED.cproject.yml
     - project: 030-InputCompare/030-InputCompare.cproject.yml
     - project: 040-Servo/040-Servo.cproject.yml
+    - project: 050-Music/050-Music.cproject.yml

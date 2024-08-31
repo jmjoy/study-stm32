@@ -12,7 +12,8 @@
             "label": "Flash Device",
             "probe": "ST-Link",
             "connectMode": "auto",
-            "debugPortMode": "SWD"
-        },
+            "debugPortMode": "SWD",
+            "openSerial": 115200,
+        }
     ]
 }

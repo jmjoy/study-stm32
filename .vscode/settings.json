@@ -63,6 +63,20 @@
                         "run": "Flash Device",
                         "debug": "Arm Debugger"
                     }
+                },
+                {
+                    "path": "005-MatrixLED/005-MatrixLED.cproject.yml",
+                    "config": {
+                        "run": "Flash Device",
+                        "debug": "Arm Debugger"
+                    }
+                },
+                {
+                    "path": "050-Music/050-Music.cproject.yml",
+                    "config": {
+                        "run": "Flash Device",
+                        "debug": "Arm Debugger"
+                    }
                 }
             ]
         }

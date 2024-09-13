@@ -77,8 +77,25 @@
                         "run": "Flash Device",
                         "debug": "Arm Debugger"
                     }
+                },
+                {
+                    "path": "060-AT24C02/060-AT24C02.cproject.yml",
+                    "config": {
+                        "run": "Flash Device",
+                        "debug": "Arm Debugger"
+                    }
+                },
+                {
+                    "path": "070-DS18B20/070-DS18B20.cproject.yml",
+                    "config": {
+                        "run": "Flash Device",
+                        "debug": "Arm Debugger"
+                    }
                 }
             ]
         }
     ],
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/Open-CMSIS-Pack/devtools/schemas/projmgr/2.5.0/tools/projmgr/schemas/csolution.schema.json": "file:///origin/home/jmjoy/workspace/stm32/study-stm32/study-stm32.csolution.yml"
+    },
 }

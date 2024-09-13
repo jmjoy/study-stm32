@@ -36,3 +36,5 @@ solution:
     - project: 030-InputCompare/030-InputCompare.cproject.yml
     - project: 040-Servo/040-Servo.cproject.yml
     - project: 050-Music/050-Music.cproject.yml
+    - project: 060-AT24C02/060-AT24C02.cproject.yml
+    - project: 070-DS18B20/070-DS18B20.cproject.yml

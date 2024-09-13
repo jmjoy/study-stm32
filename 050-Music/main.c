@@ -44,6 +44,8 @@ const uint16_t NOTE_高音6_La = 1760;
 const uint16_t NOTE_高音6_Ais = 1865;
 const uint16_t NOTE_高音7_Si = 1976;
 
+const uint16_t NOTE_超高音1_Do = 2094;
+
 uint16_t MUSIC_小星星[] = {
     NOTE_中音1_Do, 4,     NOTE_中音1_Do, 4,     NOTE_中音5_So, 4,
     NOTE_中音5_So, 4,     NOTE_中音6_La, 4,     NOTE_中音6_La, 4,
@@ -237,26 +239,43 @@ uint16_t MUSIC_鸡你太美[] = {
     NOTE_无音_0,   4,
 };
 
+uint16_t MUSIC_大鱼[] = {
+    NOTE_高音3_Mi,   2,         NOTE_高音2_Re, 2, NOTE_高音3_Mi, 2,
+    NOTE_高音6_La,   2,         NOTE_高音3_Mi, 2, NOTE_高音2_Re, 2,
+    NOTE_高音3_Mi,   2,         NOTE_高音7_Si, 2,
+
+    NOTE_高音3_Mi,   2,         NOTE_高音2_Re, 2, NOTE_高音3_Mi, 2,
+    NOTE_超高音1_Do, 2,         NOTE_高音7_Si, 4, NOTE_高音5_So, 4,
+
+    NOTE_高音2_Re,   0,         NOTE_高音3_Mi, 2, NOTE_高音2_Re, 2,
+    NOTE_高音3_Mi,   2,         NOTE_高音6_La, 2, NOTE_高音2_Re, 0,
+    NOTE_高音3_Mi,   2,         NOTE_高音2_Re, 2, NOTE_高音3_Mi, 2,
+    NOTE_高音7_Si,   2,
+
+    NOTE_高音5_So,   4 + 4 + 4, NOTE_无音_0,   4,
+
+    NOTE_高音3_Mi,   2,         NOTE_高音2_Re, 2, NOTE_高音3_Mi, 2,
+    NOTE_高音6_La,   2,         NOTE_高音3_Mi, 2, NOTE_高音2_Re, 2,
+    NOTE_高音3_Mi,   2,         NOTE_高音7_Si, 2,
+
+    NOTE_高音3_Mi,   2,         NOTE_高音2_Re, 2, NOTE_高音3_Mi, 2,
+    NOTE_超高音1_Do, 2,         NOTE_高音7_Si, 4, NOTE_高音5_So, 4,
+
+    NOTE_高音2_Re,   2,         NOTE_高音3_Mi, 2, NOTE_中音6_La, 4,
+    NOTE_高音2_Re,   2,         NOTE_高音3_Mi, 2, NOTE_中音6_La, 2,
+    NOTE_中音5_So,   2,
+
+    NOTE_中音6_La,   4 + 4 + 4, NOTE_无音_0,   4,
+};
+
 int main(void) {
 
     Music_Init();
 
-    for (int i = 0; i < sizeof(MUSIC_鸡你太美) / sizeof(uint16_t); i += 2) {
-        Music_SetNote(MUSIC_鸡你太美[i], MUSIC_鸡你太美[i + 1]);
-        Music_Suspend();
-    }
-
-    for (int i = 0; i < sizeof(MUSIC_天空之城) / sizeof(uint16_t); i += 2) {
-        Music_SetNote(MUSIC_天空之城[i], MUSIC_天空之城[i + 1]);
-        Music_Suspend();
-    }
-
-    for (int i = 0; i < sizeof(MUSIC_小星星) / sizeof(uint16_t); i += 2) {
-        Music_SetNote(MUSIC_小星星[i], MUSIC_小星星[i + 1]);
-        Music_Suspend();
-    }
-
-    Music_Suspend();
+    PLAY_MUSIC(MUSIC_大鱼);
+    PLAY_MUSIC(MUSIC_鸡你太美);
+    PLAY_MUSIC(MUSIC_天空之城);
+    PLAY_MUSIC(MUSIC_小星星);
 
     Music_Stop();
 

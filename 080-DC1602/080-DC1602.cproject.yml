@@ -1,0 +1,45 @@
+# A project translates into one executable or library.
+project:
+  setups:
+    - setup: Include files
+      add-path:
+        - .
+        - ../SYSTEM/delay
+        - ../SYSTEM/sys
+        - ../HARDWARE/LCD
+
+  groups:
+    - group: Source Files
+      files:
+        - file: ./main.c
+        - file: ./dc1602.c
+      groups:
+        - group: SYSTEM
+          groups:
+            - group: delay
+              files:
+                - file: ../SYSTEM/delay/delay.c
+            - group: sys
+              files:
+                - file: ../SYSTEM/sys/sys.c
+        - group: HARDWARE
+          groups:
+            - group: LCD
+              files:
+                - file: ../HARDWARE/LCD/lcd_init.c
+                - file: ../HARDWARE/LCD/lcd.c
+
+  # List components to use for your application.
+  # A software component is a re-usable unit that may be configurable.
+  components:
+    - component: ARM::CMSIS:CORE
+    - component: Device:Startup
+    - component: Keil::Device:StdPeriph Drivers:GPIO
+    - component: Keil::Device:StdPeriph Drivers:Framework@3.6.0
+    - component: Keil::Device:StdPeriph Drivers:RCC@3.6.0
+    - component: Keil::Device:StdPeriph Drivers:EXTI
+    - component: Keil::Device:StdPeriph Drivers:SPI
+    - component: Keil::Device:StdPeriph Drivers:TIM
+  packs:
+    - pack: Keil::STM32F1xx_DFP@2.4.1
+    - pack: ARM::CMSIS@6.1.0

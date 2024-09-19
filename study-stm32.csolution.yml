@@ -39,3 +39,5 @@ solution:
     - project: 060-AT24C02/060-AT24C02.cproject.yml
     - project: 070-DS18B20/070-DS18B20.cproject.yml
     - project: 080-DC1602/080-DC1602.cproject.yml
+    - project: 090-AD/090-AD.cproject.yml
+    - project: 095-ADDMA/095-ADDMA.cproject.yml

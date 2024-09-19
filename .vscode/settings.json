@@ -98,6 +98,20 @@
                         "run": "Flash Device",
                         "debug": "Arm Debugger"
                     }
+                },
+                {
+                    "path": "090-AD/090-AD.cproject.yml",
+                    "config": {
+                        "run": "Flash Device",
+                        "debug": "Arm Debugger"
+                    }
+                },
+                {
+                    "path": "095-ADDMA/095-ADDMA.cproject.yml",
+                    "config": {
+                        "run": "Flash Device",
+                        "debug": "Arm Debugger"
+                    }
                 }
             ]
         }

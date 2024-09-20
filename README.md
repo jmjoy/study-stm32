@@ -1,9 +1,19 @@
 # study-stm32
 
-学习stm32。
+学习STM32。
 
-IDE: Vscode的`Arm Keil Studio Pack (MDK v6)`扩展
+环境: `Linux` (`UnionTech OS`)
 
-开发板：Abrobot的STM32F103 TFT。
+IDE： `VSCode`的`Arm Keil Studio Pack (MDK v6)`扩展
+
+开发板： `Abrobot`的`STM32F103 TFT`。
+
+## 场景图
 
 ![example](./example.jpg)
+
+## 说明
+
+每一个`Project`都是独立的程序，因此同一时间需要激活其中一个，在`Manage Solution`里面选择如下：
+
+<img src="./configuration.png" width="300px">

@@ -4,6 +4,14 @@ solution:
   cdefault:
   compiler: AC6
 
+  define: 
+    - __MICROLIB
+  define-asm:
+    - __MICROLIB
+  misc:
+    - Link:
+      - --library_type=microlib
+
   # List the packs that define the device and/or board.
   packs:
     - pack: Keil::STM32F1xx_DFP@2.4.1
@@ -32,6 +40,7 @@ solution:
     - project: 004-74HC595/004-74HC595.cproject.yml
     - project: 005-MatrixLED/005-MatrixLED.cproject.yml
     - project: 010-ExtInt/010-ExtInt.cproject.yml
+    - project: 011-ExtIntBTN/011-ExtIntBTN.cproject.yml
     - project: 020-BreathLED/020-BreathLED.cproject.yml
     - project: 030-InputCompare/030-InputCompare.cproject.yml
     - project: 040-Servo/040-Servo.cproject.yml
@@ -41,3 +50,4 @@ solution:
     - project: 080-DC1602/080-DC1602.cproject.yml
     - project: 090-AD/090-AD.cproject.yml
     - project: 095-ADDMA/095-ADDMA.cproject.yml
+    - project: 100-Serial/100-Serial.cproject.yml

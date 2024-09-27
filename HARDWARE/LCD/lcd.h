@@ -16,7 +16,7 @@ typedef enum
 }FontAddr;
 
 
-void LCD_Fill(u16 xsta,u16 ysta,u16 xend,u16 yend,u16 color);//ָ������������?
+void LCD_Fill(u16 xsta,u16 ysta,u16 xend,u16 yend,u16 color);//ָ������������?
 void LCD_DrawPoint(u16 x,u16 y,u16 color);//��ָ��λ�û�һ����
 void LCD_DrawLine(u16 x1,u16 y1,u16 x2,u16 y2,u16 color);//��ָ��λ�û�һ����
 void LCD_DrawRectangle(u16 x1, u16 y1, u16 x2, u16 y2,u16 color);//��ָ��λ�û�һ������
@@ -56,7 +56,8 @@ void LCD_ShowPicture(u16 x,u16 y,u16 length,u16 width,const u8 pic[]);//��ʾ
 #define GRAYBLUE       	 0X5458 //����ɫ
 #define LIGHTGREEN     	 0X841F //ǳ��ɫ
 #define LGRAY 			     0XC618 //ǳ��ɫ(PANNEL),���屳��ɫ
-#define LGRAYBLUE        0XA651 //ǳ����ɫ(�м�����?)
+#define LGRAYBLUE        0XA651 //ǳ����ɫ(�м�����?)
 #define LBBLUE           0X2B12 //ǳ����ɫ(ѡ����Ŀ�ķ�ɫ)
+#define PINK             0xFD18
 
 #endif

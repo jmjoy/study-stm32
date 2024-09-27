@@ -4,24 +4,29 @@
 #include "delay.h"
 #include <stdlib.h>
 
-/******************************************************************************
-      ????????????????????????
-      ????????xsta,ysta   ???????
-                xend,yend   ???????
-								color       ????????
-      ???????  ??
-******************************************************************************/
-void LCD_Fill(u16 xsta,u16 ysta,u16 xend,u16 yend,u16 color)
-{          
-	u16 i,j; 
-	LCD_Address_Set(xsta,ysta,xend-1,yend-1);//?????????��
-	for(i=ysta;i<yend;i++)
-	{													   	 	
-		for(j=xsta;j<xend;j++)
+/**
+ * @brief 使用指定颜色填充LCD屏幕上的矩形区域。
+ * 
+ * 该函数使用指定颜色填充LCD屏幕上的指定矩形区域。
+ * 矩形区域的左上角由坐标(xsta, ysta)定义，右下角由坐标(xend, yend)定义。
+ * color参数指定用于填充区域的颜色。
+ * 
+ * @param xsta 矩形区域左上角的x坐标。
+ * @param ysta 矩形区域左上角的y坐标。
+ * @param xend 矩形区域右下角的x坐标。
+ * @param yend 矩形区域右下角的y坐标。
+ */
+void LCD_Fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend, uint16_t color)
+{
+	uint16_t i, j;
+	LCD_Address_Set(xsta, ysta, xend - 1, yend - 1);
+	for (i = ysta; i < yend; i++)
+	{
+		for (j = xsta; j < xend; j++)
 		{
 			LCD_WR_DATA(color);
 		}
-	} 					  	    
+	}
 }
 
 /******************************************************************************
@@ -30,7 +35,7 @@ void LCD_Fill(u16 xsta,u16 ysta,u16 xend,u16 yend,u16 color)
                 color ??????
       ???????  ??
 ******************************************************************************/
-void LCD_DrawPoint(u16 x,u16 y,u16 color)
+void LCD_DrawPoint(uint16_t x,uint16_t y,uint16_t color)
 {
 	LCD_Address_Set(x,y,x,y);//???��??��?? 
 	LCD_WR_DATA(color);
@@ -44,9 +49,9 @@ void LCD_DrawPoint(u16 x,u16 y,u16 color)
                 color   ??????
       ???????  ??
 ******************************************************************************/
-void LCD_DrawLine(u16 x1,u16 y1,u16 x2,u16 y2,u16 color)
+void LCD_DrawLine(uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2,uint16_t color)
 {
-	u16 t; 
+	uint16_t t; 
 	int xerr=0,yerr=0,delta_x,delta_y,distance;
 	int incx,incy,uRow,uCol;
 	delta_x=x2-x1; //???????????? 
@@ -87,7 +92,7 @@ void LCD_DrawLine(u16 x1,u16 y1,u16 x2,u16 y2,u16 color)
                 color   ???��????
       ???????  ??
 ******************************************************************************/
-void LCD_DrawRectangle(u16 x1, u16 y1, u16 x2, u16 y2,u16 color)
+void LCD_DrawRectangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,uint16_t color)
 {
 	LCD_DrawLine(x1,y1,x2,y1,color);
 	LCD_DrawLine(x1,y1,x1,y2,color);
@@ -103,7 +108,7 @@ void LCD_DrawRectangle(u16 x1, u16 y1, u16 x2, u16 y2,u16 color)
                 color   ??????
       ???????  ??
 ******************************************************************************/
-void Draw_Circle(u16 x0,u16 y0,u8 r,u16 color)
+void Draw_Circle(uint16_t x0,uint16_t y0,u8 r,uint16_t color)
 {
 	int a,b;
 	a=0;b=r;	  
@@ -135,7 +140,7 @@ void Draw_Circle(u16 x0,u16 y0,u8 r,u16 color)
                 mode:  0???????  1??????
       ???????  ??
 ******************************************************************************/
-void LCD_ShowChinese(u16 x,u16 y,u8 *s,u16 fc,u16 bc,u8 sizey,u8 mode)
+void LCD_ShowChinese(uint16_t x,uint16_t y,u8 *s,uint16_t fc,uint16_t bc,u8 sizey,u8 mode)
 {
 	while(*s!=0)
 	{
@@ -159,13 +164,13 @@ void LCD_ShowChinese(u16 x,u16 y,u8 *s,u16 fc,u16 bc,u8 sizey,u8 mode)
                 mode:  0???????  1??????
       ???????  ??
 ******************************************************************************/
-void LCD_ShowChinese12x12(u16 x,u16 y,u8 *s,u16 fc,u16 bc,u8 sizey,u8 mode)
+void LCD_ShowChinese12x12(uint16_t x,uint16_t y,u8 *s,uint16_t fc,uint16_t bc,u8 sizey,u8 mode)
 {
 	u8 i,j,m=0;
-	u16 k;
-	u16 HZnum;//???????
-	u16 TypefaceNum;//?????????????��
-	u16 x0=x;
+	uint16_t k;
+	uint16_t HZnum;//???????
+	uint16_t TypefaceNum;//?????????????��
+	uint16_t x0=x;
 	TypefaceNum=(sizey/8+((sizey%8)?1:0))*sizey;
 	                         
 	HZnum=sizeof(tfont12)/sizeof(typFNT_GB12);	//?????????
@@ -217,13 +222,13 @@ void LCD_ShowChinese12x12(u16 x,u16 y,u8 *s,u16 fc,u16 bc,u8 sizey,u8 mode)
                 mode:  0???????  1??????
       ???????  ??
 ******************************************************************************/
-void LCD_ShowChinese16x16(u16 x,u16 y,u8 *s,u16 fc,u16 bc,u8 sizey,u8 mode)
+void LCD_ShowChinese16x16(uint16_t x,uint16_t y,u8 *s,uint16_t fc,uint16_t bc,u8 sizey,u8 mode)
 {
 	u8 i,j,m=0;
-	u16 k;
-	u16 HZnum;//???????
-	u16 TypefaceNum;//?????????????��
-	u16 x0=x;
+	uint16_t k;
+	uint16_t HZnum;//???????
+	uint16_t TypefaceNum;//?????????????��
+	uint16_t x0=x;
   TypefaceNum=(sizey/8+((sizey%8)?1:0))*sizey;
 	HZnum=sizeof(tfont16)/sizeof(typFNT_GB16);	//?????????
 	for(k=0;k<HZnum;k++) 
@@ -275,13 +280,13 @@ void LCD_ShowChinese16x16(u16 x,u16 y,u8 *s,u16 fc,u16 bc,u8 sizey,u8 mode)
                 mode:  0???????  1??????
       ???????  ??
 ******************************************************************************/
-void LCD_ShowChinese24x24(u16 x,u16 y,u8 *s,u16 fc,u16 bc,u8 sizey,u8 mode)
+void LCD_ShowChinese24x24(uint16_t x,uint16_t y,u8 *s,uint16_t fc,uint16_t bc,u8 sizey,u8 mode)
 {
 	u8 i,j,m=0;
-	u16 k;
-	u16 HZnum;//???????
-	u16 TypefaceNum;//?????????????��
-	u16 x0=x;
+	uint16_t k;
+	uint16_t HZnum;//???????
+	uint16_t TypefaceNum;//?????????????��
+	uint16_t x0=x;
 	TypefaceNum=(sizey/8+((sizey%8)?1:0))*sizey;
 	HZnum=sizeof(tfont24)/sizeof(typFNT_GB24);	//?????????
 	for(k=0;k<HZnum;k++) 
@@ -332,13 +337,13 @@ void LCD_ShowChinese24x24(u16 x,u16 y,u8 *s,u16 fc,u16 bc,u8 sizey,u8 mode)
                 mode:  0???????  1??????
       ???????  ??
 ******************************************************************************/
-void LCD_ShowChinese32x32(u16 x,u16 y,u8 *s,u16 fc,u16 bc,u8 sizey,u8 mode)
+void LCD_ShowChinese32x32(uint16_t x,uint16_t y,u8 *s,uint16_t fc,uint16_t bc,u8 sizey,u8 mode)
 {
 	u8 i,j,m=0;
-	u16 k;
-	u16 HZnum;//???????
-	u16 TypefaceNum;//?????????????��
-	u16 x0=x;
+	uint16_t k;
+	uint16_t HZnum;//???????
+	uint16_t TypefaceNum;//?????????????��
+	uint16_t x0=x;
 	TypefaceNum=(sizey/8+((sizey%8)?1:0))*sizey;
 	HZnum=sizeof(tfont32)/sizeof(typFNT_GB32);	//?????????
 	for(k=0;k<HZnum;k++) 
@@ -390,11 +395,11 @@ void LCD_ShowChinese32x32(u16 x,u16 y,u8 *s,u16 fc,u16 bc,u8 sizey,u8 mode)
                 mode:  0???????  1??????
       ???????  ??
 ******************************************************************************/
-void LCD_ShowChar(u16 x,u16 y,u8 num,u16 fc,u16 bc,u8 sizey,u8 mode)
+void LCD_ShowChar(uint16_t x,uint16_t y,u8 num,uint16_t fc,uint16_t bc,u8 sizey,u8 mode)
 {
 	u8 temp,sizex,t,m=0;
-	u16 i,TypefaceNum;//?????????????��
-	u16 x0=x;
+	uint16_t i,TypefaceNum;//?????????????��
+	uint16_t x0=x;
 	sizex=sizey/2;
 	TypefaceNum=(sizex/8+((sizex%8)?1:0))*sizey;
 	num=num-' ';    //?????????
@@ -445,7 +450,7 @@ void LCD_ShowChar(u16 x,u16 y,u8 num,u16 fc,u16 bc,u8 sizey,u8 mode)
                 mode:  0???????  1??????
       ???????  ??
 ******************************************************************************/
-void LCD_ShowString(u16 x,u16 y,const u8 *p,u16 fc,u16 bc,u8 sizey,u8 mode)
+void LCD_ShowString(uint16_t x,uint16_t y,const u8 *p,uint16_t fc,uint16_t bc,u8 sizey,u8 mode)
 {         
 	while(*p!='\0')
 	{       
@@ -479,7 +484,7 @@ u32 mypow(u8 m,u8 n)
                 sizey ???
       ???????  ??
 ******************************************************************************/
-void LCD_ShowIntNum(u16 x,u16 y,u16 num,u8 len,u16 fc,u16 bc,u8 sizey)
+void LCD_ShowIntNum(uint16_t x,uint16_t y,uint16_t num,u8 len,uint16_t fc,uint16_t bc,u8 sizey)
 {         	
 	u8 t,temp;
 	u8 enshow=0;
@@ -511,10 +516,10 @@ void LCD_ShowIntNum(u16 x,u16 y,u16 num,u8 len,u16 fc,u16 bc,u8 sizey)
                 sizey ???
       ???????  ??
 ******************************************************************************/
-void LCD_ShowFloatNum1(u16 x,u16 y,float num,u8 len,u16 fc,u16 bc,u8 sizey)
+void LCD_ShowFloatNum1(uint16_t x,uint16_t y,float num,u8 len,uint16_t fc,uint16_t bc,u8 sizey)
 {         	
 	u8 t,temp,sizex;
-	u16 num1;
+	uint16_t num1;
 	sizex=sizey/2;
 	num1=num*100;
 	for(t=0;t<len;t++)
@@ -539,9 +544,9 @@ void LCD_ShowFloatNum1(u16 x,u16 y,float num,u8 len,u16 fc,u16 bc,u8 sizey)
                 pic[]  ??????    
       ???????  ??
 ******************************************************************************/
-void LCD_ShowPicture(u16 x,u16 y,u16 length,u16 width,const u8 pic[])
+void LCD_ShowPicture(uint16_t x,uint16_t y,uint16_t length,uint16_t width,const u8 pic[])
 {
-	u16 i,j;
+	uint16_t i,j;
 	u32 k=0;
 	LCD_Address_Set(x,y,x+length-1,y+width-1);
 	for(i=0;i<length;i++)

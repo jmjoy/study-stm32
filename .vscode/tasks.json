@@ -20,6 +20,12 @@
             "type": "shell",
             "command": "set -xe; command=\"st-flash write ${command:cmsis-csolution.getBinaryFiles} 0x8000000\"; eval \"${command//.axf/.bin}\"",
             "problemMatcher": []
+        },
+        {
+            "label": "st-flash: reset",
+            "type": "shell",
+            "command": "st-flash reset",
+            "problemMatcher": []
         }
     ]
 }

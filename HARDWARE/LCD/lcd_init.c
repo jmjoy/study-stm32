@@ -108,8 +108,8 @@ void LCD_Address_Set(u16 x1, u16 y1, u16 x2, u16 y2) {
 
 void LCD_Init(void) {
     // 预先初始化
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
-	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+    GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
 
     LCD_GPIO_Init(); // 初始化GPIO
 
@@ -123,16 +123,20 @@ void LCD_Init(void) {
 
     LCD_WR_REG(0x11); // Sleep exit
     delay_ms(120);    // Delay 120ms
+
+    // Frame Rate Control (In normal mode/ Full colors)
     LCD_WR_REG(0xB1);
     LCD_WR_DATA8(0x05);
     LCD_WR_DATA8(0x3C);
     LCD_WR_DATA8(0x3C);
 
+    // Frame Rate Control (In Idle mode/ 8-colors)
     LCD_WR_REG(0xB2);
     LCD_WR_DATA8(0x05);
     LCD_WR_DATA8(0x3C);
     LCD_WR_DATA8(0x3C);
 
+    // Frame Rate Control (In Partial mode/ full colors)
     LCD_WR_REG(0xB3);
     LCD_WR_DATA8(0x05);
     LCD_WR_DATA8(0x3C);
@@ -141,32 +145,40 @@ void LCD_Init(void) {
     LCD_WR_DATA8(0x3C);
     LCD_WR_DATA8(0x3C);
 
+    // Display Inversion Control
     LCD_WR_REG(0xB4); // Dot inversion
     LCD_WR_DATA8(0x03);
 
+    // Power Control 1
     LCD_WR_REG(0xC0);
     LCD_WR_DATA8(0x0E);
     LCD_WR_DATA8(0x0E);
     LCD_WR_DATA8(0x04);
 
+    // Power Control 2
     LCD_WR_REG(0xC1);
     LCD_WR_DATA8(0xC5);
 
+    // Power Control 3 (In Normal mode)
     LCD_WR_REG(0xC2);
     LCD_WR_DATA8(0x0d);
     LCD_WR_DATA8(0x00);
 
+    // Power Control 4 (In Idle mode)
     LCD_WR_REG(0xC3);
     LCD_WR_DATA8(0x8D);
     LCD_WR_DATA8(0x2A);
 
+    // Power Control 5 (In Partial mode)
     LCD_WR_REG(0xC4);
     LCD_WR_DATA8(0x8D);
     LCD_WR_DATA8(0xEE);
 
+    // VCOM Control 1
     LCD_WR_REG(0xC5);   // VCOM
     LCD_WR_DATA8(0x06); // 1D  .06
 
+    // Memory Data Access Control
     LCD_WR_REG(0x36); // MX, MY, RGB mode
     if (USE_HORIZONTAL == 0)
         LCD_WR_DATA8(0x08);
@@ -177,9 +189,11 @@ void LCD_Init(void) {
     else
         LCD_WR_DATA8(0xA8);
 
+    // Interface Pixel Format
     LCD_WR_REG(0x3A);
     LCD_WR_DATA8(0x55);
 
+    // Gamma (‘+’polarity) Correction Characteristics Setting
     LCD_WR_REG(0xE0);
     LCD_WR_DATA8(0x0b);
     LCD_WR_DATA8(0x17);
@@ -198,6 +212,7 @@ void LCD_Init(void) {
     LCD_WR_DATA8(0x05);
     LCD_WR_DATA8(0x10);
 
+    // Gamma ‘-’polarity Correction Characteristics Setting
     LCD_WR_REG(0xE1);
     LCD_WR_DATA8(0x0c);
     LCD_WR_DATA8(0x19);

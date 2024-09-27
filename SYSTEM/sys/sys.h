@@ -1,7 +1,7 @@
 #ifndef __SYS_H
 #define __SYS_H	
-#include <stdint.h>
-#include "stm32f10x.h" 
+
+#include "stm32f10x_conf.h"
 
 //0,��֧��ucos
 //1,֧��ucos

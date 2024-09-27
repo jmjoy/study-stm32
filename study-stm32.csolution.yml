@@ -46,6 +46,7 @@ solution:
     - project: 040-Servo/040-Servo.cproject.yml
     - project: 050-Music/050-Music.cproject.yml
     - project: 060-AT24C02/060-AT24C02.cproject.yml
+    - project: 061-AT24C02N/061-AT24C02N.cproject.yml
     - project: 070-DS18B20/070-DS18B20.cproject.yml
     - project: 080-DC1602/080-DC1602.cproject.yml
     - project: 090-AD/090-AD.cproject.yml

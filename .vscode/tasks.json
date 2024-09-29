@@ -16,13 +16,13 @@
             "openSerial": 115200,
         },
         {
-            "label": "ST Flash",
+            "label": "ST Flash: write",
             "type": "shell",
             "command": "set -xe; command=\"st-flash write ${command:cmsis-csolution.getBinaryFiles} 0x8000000\"; eval \"${command//.axf/.bin}\"",
             "problemMatcher": []
         },
         {
-            "label": "st-flash: reset",
+            "label": "ST Flash: reset",
             "type": "shell",
             "command": "st-flash reset",
             "problemMatcher": []

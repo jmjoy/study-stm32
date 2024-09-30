@@ -140,6 +140,13 @@
                         "run": "Flash Device",
                         "debug": "Arm Debugger"
                     }
+                },
+                {
+                    "path": "120-RTC/120-RTC.cproject.yml",
+                    "config": {
+                        "run": "ST Flash: write",
+                        "debug": "Arm Debugger"
+                    }
                 }
             ]
         }

@@ -1,16 +1,51 @@
 #include "lcd_init.h"
 #include "delay.h"
 
+bool LCD_USE_HARDWARE_SPI = false;
+
 void LCD_GPIO_Init(void) {
-    GPIO_InitTypeDef GPIO_InitStructure;
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE); // 使能AB端口时钟
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 |
-                                  GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;  // 推挽输出
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; // 速度50MHz
-    GPIO_Init(GPIOB, &GPIO_InitStructure);            // 初始化GPIOB
-    GPIO_SetBits(GPIOB, GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 |
-                            GPIO_Pin_7 | GPIO_Pin_8);
+    if (LCD_USE_HARDWARE_SPI) {
+        GPIO_PinRemapConfig(GPIO_Remap_SPI1, ENABLE);
+
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE); // 使能AB端口时钟
+
+        GPIO_InitTypeDef GPIO_InitStructure;
+        GPIO_InitStructure.GPIO_Pin =
+            GPIO_Pin_4 | GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8;
+        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;  // 推挽输出
+        GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; // 速度50MHz
+        GPIO_Init(GPIOB, &GPIO_InitStructure);            // 初始化GPIOB
+        GPIO_SetBits(GPIOB, GPIO_Pin_4 | GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8);
+
+        GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3 | GPIO_Pin_5;
+        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; // 复用推挽输出
+        GPIO_Init(GPIOB, &GPIO_InitStructure);          // 初始化GPIOB
+
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
+        SPI_InitTypeDef SPI_InitStructure = {
+            .SPI_Direction = SPI_Direction_1Line_Tx,
+            .SPI_Mode = SPI_Mode_Master,
+            .SPI_DataSize = SPI_DataSize_8b,
+            .SPI_CPOL = SPI_CPOL_High,
+            .SPI_CPHA = SPI_CPHA_2Edge,
+            .SPI_NSS = SPI_NSS_Soft,
+            .SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4,
+            .SPI_FirstBit = SPI_FirstBit_MSB,
+            .SPI_CRCPolynomial = 7,
+        };
+        SPI_Init(SPI1, &SPI_InitStructure);
+        SPI_Cmd(SPI1, ENABLE);
+    } else {
+        GPIO_InitTypeDef GPIO_InitStructure;
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE); // 使能AB端口时钟
+        GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 |
+                                      GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8;
+        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;  // 推挽输出
+        GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; // 速度50MHz
+        GPIO_Init(GPIOB, &GPIO_InitStructure);            // 初始化GPIOB
+        GPIO_SetBits(GPIOB, GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 |
+                                GPIO_Pin_7 | GPIO_Pin_8);
+    }
 }
 
 /******************************************************************************
@@ -18,18 +53,23 @@ void LCD_GPIO_Init(void) {
       入口数据：dat  要写入的串行数据
       返回值：  无
 ******************************************************************************/
-void LCD_Writ_Bus(u8 dat) {
-    u8 i;
+void LCD_Writ_Bus(uint8_t dat) {
     LCD_CS_Clr();
-    for (i = 0; i < 8; i++) {
-        LCD_SCLK_Clr();
-        if (dat & 0x80) {
-            LCD_MOSI_Set();
-        } else {
-            LCD_MOSI_Clr();
+    if (LCD_USE_HARDWARE_SPI) {
+        while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET) {}
+        SPI_I2S_SendData(SPI1, dat);
+        delay_us(1);
+    } else {
+        for (uint8_t i = 0; i < 8; i++) {
+            LCD_SCLK_Clr();
+            if (dat & 0x80) {
+                LCD_MOSI_Set();
+            } else {
+                LCD_MOSI_Clr();
+            }
+            LCD_SCLK_Set();
+            dat <<= 1;
         }
-        LCD_SCLK_Set();
-        dat <<= 1;
     }
     LCD_CS_Set();
 }
@@ -39,7 +79,7 @@ void LCD_Writ_Bus(u8 dat) {
       入口数据：dat 写入的数据
       返回值：  无
 ******************************************************************************/
-void LCD_WR_DATA8(u8 dat) {
+void LCD_WR_DATA8(uint8_t dat) {
     LCD_Writ_Bus(dat);
 }
 
@@ -48,7 +88,7 @@ void LCD_WR_DATA8(u8 dat) {
       入口数据：dat 写入的数据
       返回值：  无
 ******************************************************************************/
-void LCD_WR_DATA(u16 dat) {
+void LCD_WR_DATA(uint16_t dat) {
     LCD_Writ_Bus(dat >> 8);
     LCD_Writ_Bus(dat);
 }
@@ -58,7 +98,7 @@ void LCD_WR_DATA(u16 dat) {
       入口数据：dat 写入的命令
       返回值：  无
 ******************************************************************************/
-void LCD_WR_REG(u8 dat) {
+void LCD_WR_REG(uint8_t dat) {
     LCD_DC_Clr(); // 写命令
     LCD_Writ_Bus(dat);
     LCD_DC_Set(); // 写数据
@@ -70,7 +110,7 @@ void LCD_WR_REG(u8 dat) {
                 y1,y2 设置行的起始和结束地址
       返回值：  无
 ******************************************************************************/
-void LCD_Address_Set(u16 x1, u16 y1, u16 x2, u16 y2) {
+void LCD_Address_Set(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2) {
     if (USE_HORIZONTAL == 0) {
         LCD_WR_REG(0x2a); // 列地址设置
         LCD_WR_DATA(x1 + 24);
@@ -233,4 +273,8 @@ void LCD_Init(void) {
 
     delay_ms(120);
     LCD_WR_REG(0x29); // Display on
+}
+
+void LCD_UseHardwareSPI(void) {
+    LCD_USE_HARDWARE_SPI = true;
 }

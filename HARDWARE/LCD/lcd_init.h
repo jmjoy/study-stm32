@@ -2,8 +2,7 @@
 #define __LCD_INIT_H
 
 #include "sys.h"
-
-#define USE_HARDWARE_SPI 0
+#include <stdbool.h>
 
 #define USE_HORIZONTAL 2
 
@@ -33,6 +32,11 @@
 #define LCD_BLK_Clr() GPIO_ResetBits(GPIOB, GPIO_Pin_8) // BLK
 #define LCD_BLK_Set() GPIO_SetBits(GPIOB, GPIO_Pin_8)
 
+/**
+ * @brief 使用硬件SPI
+ */
+extern bool LCD_USE_HARDWARE_SPI;
+
 void LCD_GPIO_Init(void);
 void LCD_Writ_Bus(uint8_t dat);
 void LCD_WR_DATA8(uint8_t dat);
@@ -40,4 +44,7 @@ void LCD_WR_DATA(uint16_t dat);
 void LCD_WR_REG(uint8_t dat);
 void LCD_Address_Set(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
 void LCD_Init(void);
+
+void LCD_UseHardwareSPI(void);
+
 #endif

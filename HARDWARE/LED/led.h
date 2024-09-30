@@ -3,15 +3,11 @@
 
 #include "sys.h"
 
+#define LED PCout(13) // PC
 
-
-#define LED PCout(13)	// PC
-
+/**
+ * @brief Initializes the LED.
+ */
 void LED_Init(void);
 
-
 #endif
-
-
-
-

@@ -10,7 +10,6 @@
 #if USE_HORIZONTAL == 0 || USE_HORIZONTAL == 1
 #define LCD_W 80
 #define LCD_H 160
-
 #else
 #define LCD_W 160
 #define LCD_H 80

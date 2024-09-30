@@ -19,21 +19,20 @@ project:
         - file: ./SPI.c
         - file: ./W25Q64.h
         - file: ./W25Q64.c
+    - group: SYSTEM
       groups:
-        - group: SYSTEM
-          groups:
-            - group: delay
-              files:
-                - file: ../SYSTEM/delay/delay.c
-            - group: sys
-              files:
-                - file: ../SYSTEM/sys/sys.c
-        - group: HARDWARE
-          groups:
-            - group: LCD
-              files:
-                - file: ../HARDWARE/LCD/lcd_init.c
-                - file: ../HARDWARE/LCD/lcd.c
+        - group: delay
+          files:
+            - file: ../SYSTEM/delay/delay.c
+        - group: sys
+          files:
+            - file: ../SYSTEM/sys/sys.c
+    - group: HARDWARE
+      groups:
+        - group: LCD
+          files:
+            - file: ../HARDWARE/LCD/lcd_init.c
+            - file: ../HARDWARE/LCD/lcd.c
 
   # List components to use for your application.
   # A software component is a re-usable unit that may be configurable.

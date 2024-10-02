@@ -1,0 +1,55 @@
+# A project translates into one executable or library.
+project:
+  setups:
+    - setup: Include files
+      add-path:
+        - .
+        - ../SYSTEM/delay
+        - ../SYSTEM/sys
+        - ../HARDWARE/LCD
+
+  output:
+    type: bin
+
+  groups:
+    - group: Source Files
+      files:
+        - file: ./main.c
+    - group: SYSTEM
+      groups:
+        - group: delay
+          files:
+            - file: ../SYSTEM/delay/delay.c
+        - group: sys
+          files:
+            - file: ../SYSTEM/sys/sys.c
+    - group: HARDWARE
+      groups:
+        - group: LCD
+          files:
+            - file: ../HARDWARE/LCD/lcd_init.c
+            - file: ../HARDWARE/LCD/lcd.c
+
+  # List components to use for your application.
+  # A software component is a re-usable unit that may be configurable.
+  components:
+    - component: ARM::CMSIS:CORE
+    - component: Device:Startup
+    - component: Keil::Device:StdPeriph Drivers:GPIO
+    - component: Keil::Device:StdPeriph Drivers:Framework@3.6.0
+    - component: Keil::Device:StdPeriph Drivers:RCC@3.6.0
+    - component: Keil::Device:StdPeriph Drivers:EXTI
+    - component: Keil::Device:StdPeriph Drivers:SPI
+    - component: Keil::Device:StdPeriph Drivers:TIM
+    - component: ARM::CMSIS:OS Tick:SysTick
+    - component: Keil::Device:GPIO
+    - component: Keil::Device:StdPeriph Drivers:ADC
+    - component: Keil::Device:StdPeriph Drivers:DMA
+    - component: Keil::Device:StdPeriph Drivers:USART
+    - component: Keil::Device:StdPeriph Drivers:RTC
+    - component: Keil::Device:StdPeriph Drivers:PWR
+    - component: Keil::Device:StdPeriph Drivers:BKP
+    - component: Keil::Device:StdPeriph Drivers:IWDG
+  packs:
+    - pack: Keil::STM32F1xx_DFP@2.4.1
+    - pack: ARM::CMSIS@6.1.0

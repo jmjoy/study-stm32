@@ -55,3 +55,5 @@ solution:
     - project: 110-W25Q64/110-W25Q64.cproject.yml
     - project: 120-RTC/120-RTC.cproject.yml
     - project: 130-PWR/130-PWR.cproject.yml
+    - project: 140-WDG/140-WDG.cproject.yml
+    - project: 150-FLASH/150-FLASH.cproject.yml

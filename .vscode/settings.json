@@ -154,6 +154,20 @@
                         "run": "ST Flash: write",
                         "debug": "Arm Debugger"
                     }
+                },
+                {
+                    "path": "140-WDG/140-WDG.cproject.yml",
+                    "config": {
+                        "run": "ST Flash: write",
+                        "debug": "Arm Debugger"
+                    }
+                },
+                {
+                    "path": "150-FLASH/150-FLASH.cproject.yml",
+                    "config": {
+                        "run": "ST Flash: write",
+                        "debug": "Arm Debugger"
+                    }
                 }
             ]
         }

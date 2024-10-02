@@ -54,3 +54,4 @@ solution:
     - project: 100-Serial/100-Serial.cproject.yml
     - project: 110-W25Q64/110-W25Q64.cproject.yml
     - project: 120-RTC/120-RTC.cproject.yml
+    - project: 130-PWR/130-PWR.cproject.yml

@@ -147,6 +147,13 @@
                         "run": "ST Flash: write",
                         "debug": "Arm Debugger"
                     }
+                },
+                {
+                    "path": "130-PWR/130-PWR.cproject.yml",
+                    "config": {
+                        "run": "ST Flash: write",
+                        "debug": "Arm Debugger"
+                    }
                 }
             ]
         }

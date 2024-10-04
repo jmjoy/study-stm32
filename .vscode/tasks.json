@@ -10,7 +10,7 @@
             "processorName": "${command:cmsis-csolution.getProcessorName}",
             "problemMatcher": [],
             "label": "Flash Device",
-            "probe": "ST-Link",
+            "probe": "CMSIS-DAP",
             "connectMode": "auto",
             "debugPortMode": "SWD",
             "openSerial": 115200,
@@ -19,13 +19,24 @@
             "label": "ST Flash: write",
             "type": "shell",
             "command": "set -xe; command=\"st-flash write ${command:cmsis-csolution.getBinaryFiles} 0x8000000\"; eval \"${command//.axf/.bin}\"",
-            "problemMatcher": []
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
         },
         {
             "label": "ST Flash: reset",
             "type": "shell",
             "command": "st-flash reset",
             "problemMatcher": []
-        }
+        },
+        {
+            "label": "Probe RS: download",
+            "type": "shell",
+            "command": "probe-rs download --chip STM32F103C8 --protocol swd ${command:cmsis-csolution.getBinaryFiles}",
+            "problemMatcher": [],
+            "group": "build",
+        },
     ]
 }

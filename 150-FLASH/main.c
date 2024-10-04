@@ -10,7 +10,7 @@
 #define LAST_FLASH_ADDRESS 0x0800FC00
 
 static void show_uint32_t(uint16_t x, uint16_t y, uint32_t num) {
-    char str[16];
+    char str[12];
     sprintf(str, "0x%x", num);
     LCD_ShowString(x, y, str, GREEN, BRRED, 12, 0);
 }

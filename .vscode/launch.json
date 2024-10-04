@@ -14,6 +14,20 @@
             "deviceName": "${command:cmsis-csolution.getDeviceName}",
             "processorName": "${command:cmsis-csolution.getProcessorName}",
             "probe": "ST-Link",
-        }
+        },
+        {
+            "name": "Probe RS Debugger",
+            "type": "probe-rs-debug",
+            "request": "launch",
+            "chip": "STM32F103C8",
+            "cwd": "${workspaceFolder}",
+            "coreConfigs": [
+                {
+                    "programBinary": "${command:cmsis-csolution.getBinaryFiles}",
+                    "rttEnabled": false,
+                }
+            ],
+            "preLaunchTask": "Probe RS: download",
+        },
     ]
 }
